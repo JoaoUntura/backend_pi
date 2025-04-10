@@ -11,6 +11,14 @@ import db from "../config/database.js";
         }
            }
 
+        async create(pedido_id, produto_id,quantidade){
+        try{
+            await db.insert({nome:nome, contato:contato}).table("pedido_produto")
+            return {validated:true}
+        }catch(error){
+            return {validated: false, error: error}
+        }
+        }
 
     async findById(id){
         try{

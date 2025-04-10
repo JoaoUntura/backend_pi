@@ -19,6 +19,7 @@ router.post('/pedidos/csv', upload.single('file'), pedidoControllers.insertCsv)
 
 router.get('/cliente', clienteControllers.listAll)
 router.get('/cliente/:id', clienteControllers.listById)
+router.post('/cliente', clienteControllers.newCliente)
 router.post('/cliente/csv', upload.single('file'), clienteControllers.insertCsv)
 
 router.get('/pedido_produto', pedProdControllers.listAll)

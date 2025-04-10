@@ -27,6 +27,15 @@ import fs from 'fs';
         }
     }
 
+    async create(nome, preco){
+        try{
+            await db.insert({nome:nome, preco:preco}).table("Produto")
+            return {validated:true}
+        }catch(error){
+            return {validated: false, error: error}
+        }
+        }
+
     async insertViaCsv(file){
    
         const results = [];
