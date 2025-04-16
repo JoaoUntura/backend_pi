@@ -8,14 +8,16 @@ import multer from "multer"
 const upload = multer({ dest: 'uploads/' });
 const router = express.Router()
 
-router.get('/produtos', produtoControllers.listAll)
-router.get('/produtos/:id', produtoControllers.listById)
-router.post('/produtos/csv', upload.single('file'), produtoControllers.insertCsv)
+router.get('/produto', produtoControllers.listAll)
+router.get('/produto/:id', produtoControllers.listById)
+router.post('/produto',produtoControllers.newProduto)
+router.post('/produto/csv', upload.single('file'), produtoControllers.insertCsv)
 
 
-router.get('/pedidos', pedidoControllers.listAll)
-router.get('/pedidos/:id', pedidoControllers.listById)
-router.post('/pedidos/csv', upload.single('file'), pedidoControllers.insertCsv)
+router.get('/pedido', pedidoControllers.listAll)
+router.get('/pedido/:id', pedidoControllers.listById)
+router.post('/pedido', pedidoControllers.newPedido)
+router.post('/pedido/csv', upload.single('file'), pedidoControllers.insertCsv)
 
 router.get('/cliente', clienteControllers.listAll)
 router.get('/cliente/:id', clienteControllers.listById)
@@ -24,6 +26,7 @@ router.post('/cliente/csv', upload.single('file'), clienteControllers.insertCsv)
 
 router.get('/pedido_produto', pedProdControllers.listAll)
 router.get('/pedido_produto/:id', pedProdControllers.listById)
+router.post('/pedido_produto', pedProdControllers.newPedidoProduto)
 
 
 

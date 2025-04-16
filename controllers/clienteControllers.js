@@ -11,7 +11,7 @@ class ClienteControllers{
     async listById(req, res){
         const id = req.params.id
         if (isNaN(id)){
-            res.status(406).json({sucess:false, values: "Id inválido!"})
+            res.status(406).json({sucess:false, message: "Id inválido!"})
         }else{
 
             let result = await cliente.findById(id)
@@ -30,6 +30,10 @@ class ClienteControllers{
     async newCliente(req,res){
         let {nome,contato} = req.body
 
+        if (!nome || !contato){
+            res.status(406).json({sucess:false, message: "Envie todos os campos necessários!"})
+        }
+
         let result = await cliente.create(nome,contato)
         result.validated
         ?res.status(201).json({sucess:true, message:"Cliente criado com sucesso!"})
@@ -38,14 +42,16 @@ class ClienteControllers{
 
     async insertCsv(req, res){
           
-            const file = req.file.path
-           
-            const results = await cliente.insertViaCsv(file)
-            if(!results.validated){
-                res.status(404).json({sucess:false, message: results.err})
-            }else{
-                res.status(200).json({sucess:true, values: results.values})
-            }
+        const file = req.file.path
+        if (!file){
+            res.status(406).json({sucess:false, message: "Envie o arquivo no formato CSV!"})
+        }
+
+        const results = await cliente.insertViaCsv(file)
+
+        results.validated
+        ?res.status(404).json({sucess:false, message: results.err})
+        : res.status(200).json({sucess:true, message: "Informações inseridas com sucesso!"})
     
     }
 

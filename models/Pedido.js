@@ -29,7 +29,7 @@ import fs from 'fs';
 
     async create(data, cliente_id, total,forma_pagamento){
         try{
-            await db.insert({nome:nome, contato:contato}).table("Pedido")
+            await db.insert({data:data, cliente_id:cliente_id, total:total,forma_pagamento:forma_pagamento }).table("Pedido")
             return {validated:true}
         }catch(error){
             return {validated: false, error: error}

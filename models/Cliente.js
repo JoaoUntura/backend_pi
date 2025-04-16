@@ -55,7 +55,7 @@ import fs from 'fs';
               fs.unlinkSync(file);
           });
           
-          return {validated: true, values: results}
+          return {validated: true}
         }catch (err) {
             return {validated: false, err: err.message}
         }
