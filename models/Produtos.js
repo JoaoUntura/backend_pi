@@ -34,7 +34,30 @@ import fs from 'fs';
         }catch(error){
             return {validated: false, error: error}
         }
+    }
+
+    async update(id, nome, preco){
+
+        let produto = await this.findById(id)
+
+        if(produto.validated && produto.values != undefined){
+           
+            let editProduto = {}
+            nome ? editProduto.nome = nome : null
+            preco ? editProduto.preco = preco : null
+
+            try{
+                await db.update(editProduto).where('id', id).table("Produto")
+                return {validated:true}
+            }catch(error){
+                return {validated: false, error: error}
+            }
+
+        }else{
+            return {validated:false, error: "Produto não existente"}
         }
+
+    }
 
     async insertViaCsv(file){
    

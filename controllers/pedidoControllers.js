@@ -30,7 +30,7 @@ class PedidoControler {
   async newPedido(req, res) {
     let { data, cliente_id, total, forma_pagamento } = req.body;
 
-    if (!data || !cliente_id || !total || forma_pagamento) {
+    if (!data || !cliente_id || !total || !forma_pagamento) {
       res
         .status(406)
         .json({
@@ -47,6 +47,22 @@ class PedidoControler {
       : res.status(404).json({ success: false, message: result.error });
   }
 
+    async editPedido(req,res){
+        let id = req.params.id
+        let { data, cliente_id, total, forma_pagamento } = req.body;
+
+        if (isNaN(id)){
+            res.status(406).json({success:false, message: "Id inválido!"})
+        }else{
+            let result = await pedido.update(id, data, cliente_id, total, forma_pagamento)
+
+            result.validated 
+            ?res.status(200).json({success:true, message:"Update realizado com successo"})
+            :res.status(404).json({success:false, message:result.error})
+        }
+
+    }
+  
   async insertCsv(req, res) {
     const file = req.file.path;
     if (!file) {

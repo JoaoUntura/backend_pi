@@ -1,3 +1,4 @@
+
 import db from "../config/database.js";
 import csv from 'csv-parser';
 import fs from 'fs';
@@ -34,6 +35,29 @@ import fs from 'fs';
         }catch(error){
             return {validated: false, error: error}
         }
+    }
+
+    async update(id, nome, contato){
+
+        let cliente = await this.findById(id)
+
+        if(cliente.validated && cliente.values != undefined){
+           
+            let editCliente = {}
+            nome ? editCliente.nome = nome : null
+            contato ? editCliente.contato = contato : null
+
+            try{
+                await db.update(editCliente).where('id', id).table("Cliente")
+                return {validated:true}
+            }catch(error){
+                return {validated: false, error: error}
+            }
+
+        }else{
+            return {validated:false, error: "Cliente não existente"}
+        }
+
     }
 
     async insertViaCsv(file){
