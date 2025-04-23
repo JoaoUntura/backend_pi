@@ -50,7 +50,7 @@ class PedProdControllers {
         if (isNaN(id)) {
             res.status(406).json({ success: false, message: "Id inválido!" })
         } else {
-            let result = await pedido.update(id, pedido_id, produto_id, quantidade)
+            let result = await pedidoProduto.update(id, pedido_id, produto_id, quantidade)
 
             result.validated
                 ? res.status(200).json({ success: true, message: "Update realizado com successo" })
@@ -58,6 +58,22 @@ class PedProdControllers {
         }
 
     }
+
+        async deletePedidoProduto(req,res){
+          let id = req.params.id
+    
+          if (isNaN(id)){
+              res.status(406).json({success:false, message: "Id inválido!"})
+          }else{
+              let result = await pedidoProduto.delete(id)
+    
+              result.validated 
+              ?res.status(200).json({success:true, message:"Deletado com successo"})
+              :res.status(404).json({success:false, message:result.error})
+          }
+    
+     
+      }
 
 }
 

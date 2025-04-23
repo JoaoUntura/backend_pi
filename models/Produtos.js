@@ -59,6 +59,25 @@ import fs from 'fs';
 
     }
 
+    async delete(id){
+        const validation = await this.findById(id)
+    
+        if (validation.values != undefined){
+    
+            try{
+                await db.delete().where("id",id).table("Produto")
+                return {validated:true}
+    
+            }catch(error){
+                return {validated:false, error:error}
+            }
+    
+        }else{
+            return {validated:false, error: "Produto não existente"} 
+        }
+    
+    }
+
     async insertViaCsv(file){
    
         const results = [];

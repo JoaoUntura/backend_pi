@@ -49,6 +49,25 @@ import db from "../config/database.js";
 
     }
 
+    async delete(id){
+        const validation = await this.findById(id)
+    
+        if (validation.values != undefined){
+    
+            try{
+                await db.delete().where("id",id).table("pedido_produto")
+                return {validated:true}
+    
+            }catch(error){
+                return {validated:false, error:error}
+            }
+    
+        }else{
+            return {validated:false, error: "pedido_produto não existente"} 
+        }
+    
+    }
+
     async create(pedido_id, produto_id,quantidade){
         try{
             await db.insert({pedido_id:pedido_id, produto_id:produto_id, quantidade:quantidade}).table("pedido_produto")

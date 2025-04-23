@@ -62,6 +62,22 @@ class PedidoControler {
         }
 
     }
+
+    async deletePedido(req,res){
+      let id = req.params.id
+
+      if (isNaN(id)){
+          res.status(406).json({success:false, message: "Id inválido!"})
+      }else{
+          let result = await pedido.delete(id)
+
+          result.validated 
+          ?res.status(200).json({success:true, message:"Deletado com successo"})
+          :res.status(404).json({success:false, message:result.error})
+      }
+
+ 
+  }
   
   async insertCsv(req, res) {
     const file = req.file.path;

@@ -57,6 +57,22 @@ class ClienteControllers{
    
     }
 
+    async deleteClient(req,res){
+        let id = req.params.id
+
+        if (isNaN(id)){
+            res.status(406).json({success:false, message: "Id inválido!"})
+        }else{
+            let result = await cliente.delete(id)
+
+            result.validated 
+            ?res.status(200).json({success:true, message:"Deletado com successo"})
+            :res.status(404).json({success:false, message:result.error})
+        }
+
+   
+    }
+
     async insertCsv(req, res){
           
         const file = req.file.path
