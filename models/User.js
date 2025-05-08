@@ -6,7 +6,7 @@ import fs from 'fs';
 
     async findAll(){
         try {
-            const users = await db.select("id","nome","email").table('User')
+            const users = await db.select("id","nome","email","role_id").table('User')
             return {validated: true, values:users}
         } catch (error) {
             return {validated: false, error: error}
@@ -17,7 +17,7 @@ import fs from 'fs';
     async findById(id){
         try{
 
-            const user = await db.select("id","nome","email").where("id", id).table('User')
+            const user = await db.select("id","nome","email","role_id").where("id", id).table('User')
             return user.length > 0 
             ?{validated:true, values:user}
             :{validated:true, values:undefined}
@@ -30,7 +30,7 @@ import fs from 'fs';
     async findByEmail(email){
         try{
 
-            const user = await db.select("id","nome","email","password_hashed").where("email", email).table('User')
+            const user = await db.select("id","nome","email","password_hashed","role_id").where("email", email).table('User')
             return user.length > 0 
             ?{validated:true, values:user[0]}
             :{validated:true, values:undefined}
