@@ -3,8 +3,13 @@ import produtoControllers from "../controllers/produtoControllers.js"
 import pedidoControllers from "../controllers/pedidoControllers.js"
 import clienteControllers from "../controllers/clienteControllers.js"
 import pedProdControllers from "../controllers/pedProdControllers.js"
-
+import userControllers from "../controllers/userControllers.js"
+import loginControllers from "../controllers/loginControllers.js"
+import middleware from "../middleware/auth_user_middleware.js"
+import middlewareAdmin from "../middleware/auth_admin_middleware.js"
 import multer from "multer"
+
+
 const upload = multer({ dest: 'uploads/' });
 const router = express.Router()
 
@@ -16,11 +21,11 @@ router.post('/produto',produtoControllers.newProduto)
 router.post('/produto/csv', upload.single('file'), produtoControllers.insertCsv)
 
 
-router.get('/pedido', pedidoControllers.listAll)
+router.get('/pedido',pedidoControllers.listAll)
 router.get('/pedido/:id', pedidoControllers.listById)
 router.put('/pedido/:id', pedidoControllers.editPedido)
-router.delete('/pedido/:id', pedidoControllers.deletePedido)
-router.post('/pedido', pedidoControllers.newPedido)
+router.delete('/pedido/:id',middleware, pedidoControllers.deletePedido)
+router.post('/pedido',middlewareAdmin, pedidoControllers.newPedido)
 router.post('/pedido/csv', upload.single('file'), pedidoControllers.insertCsv)
 
 router.get('/cliente', clienteControllers.listAll)
@@ -37,5 +42,12 @@ router.delete('/pedido_produto/:id', pedProdControllers.deletePedidoProduto)
 router.post('/pedido_produto', pedProdControllers.newPedidoProduto)
 
 
+router.get('/user', userControllers.listAll)
+router.get('/user/:id', userControllers.listById)
+router.put('/user/:id', userControllers.editUser)
+router.delete('/user/:id', userControllers.deleteUser)
+router.post('/user', userControllers.newUser)
+
+router.post('/login', loginControllers.login)
 
 export default router
