@@ -17,7 +17,7 @@ class LoginController{
             if(!passValiated){
                res.status(406).json({success: false, message:"Senha Invalida"})
             }else{
-                let token = jwt.sign({email: user.values.email,role:user.values.role_id},process.env.SECRET,{expiresIn:100000}) 
+                let token = jwt.sign({id:user.values.id,email: user.values.email,role:user.values.role_id},process.env.SECRET,{expiresIn:100000}) 
                 res.status(200).json({success: true, token: token})
             }
         }else{
