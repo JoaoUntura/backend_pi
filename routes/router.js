@@ -20,12 +20,11 @@ router.delete('/produto/:id', produtoControllers.deleteProduto)
 router.post('/produto',produtoControllers.newProduto)
 router.post('/produto/csv', upload.single('file'), produtoControllers.insertCsv)
 
-
 router.get('/pedido',pedidoControllers.listAll)
 router.get('/pedido/:id', pedidoControllers.listById)
 router.put('/pedido/:id', pedidoControllers.editPedido)
 router.delete('/pedido/:id',middleware, pedidoControllers.deletePedido)
-router.post('/pedido',middlewareAdmin, pedidoControllers.newPedido)
+router.post('/pedido', pedidoControllers.newPedido)
 router.post('/pedido/csv', upload.single('file'), pedidoControllers.insertCsv)
 
 router.get('/cliente', clienteControllers.listAll)

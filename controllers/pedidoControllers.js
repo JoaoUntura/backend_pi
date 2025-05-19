@@ -43,7 +43,7 @@ class PedidoControler {
     result.validated
       ? res
           .status(201)
-          .json({ success: true, message: "Produto criado com successo!" })
+          .json({ success: true, message: "Pedido criado com successo!" })
       : res.status(404).json({ success: false, message: result.error });
   }
 

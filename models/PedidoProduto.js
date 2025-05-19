@@ -4,12 +4,15 @@ import db from "../config/database.js";
 
     async findAll(){
         try {
-            const pedidoProduto = await db.select("id", "pedido_id", "produto_id", "quantidade").table("pedido_produto")
+            const pedidoProduto = await db.select("pedido_produto.id", "pedido_produto.pedido_id",
+            "pedido_produto.produto_id", "pedido_produto.quantidade", "Produto.nome")
+            .innerJoin('Produto', 'pedido_produto.produto_id', '=', 'Produto.id')
+            .table("pedido_produto")
             return {validated: true, values:pedidoProduto}
         } catch (error) {
             return {validated: false, error: error}
         }
-           }
+    }
 
 
     async findById(id){
@@ -24,6 +27,8 @@ import db from "../config/database.js";
             return {validated: false, error: error}
         }
     }
+
+    
 
     async update(id, pedido_id, produto_id,quantidade){
 
