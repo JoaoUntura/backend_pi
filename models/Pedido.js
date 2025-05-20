@@ -6,7 +6,8 @@ class Pedido {
   async findAll() {
     try {
       const pedidos = await db
-        .select("id", "data", "cliente_id", "total", "forma_pagamento")
+        .select("Pedido.id", "Pedido.data", "Pedido.cliente_id", "Pedido.total", "Pedido.forma_pagamento", "Cliente.nome")
+        .innerJoin('Cliente', 'Pedido.cliente_id', '=', 'Cliente.id')
         .table("Pedido");
       return { validated: true, values: pedidos };
     } catch (error) {
