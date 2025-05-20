@@ -30,7 +30,7 @@ class Pedido {
 
   async create(data, cliente_id, total, forma_pagamento) {
     try {
-      await db
+      const pedido = await db
         .insert({
           data: data,
           cliente_id: cliente_id,
@@ -38,7 +38,7 @@ class Pedido {
           forma_pagamento: forma_pagamento,
         })
         .table("Pedido");
-      return { validated: true };
+      return { validated: true, values:pedido };
     } catch (error) {
       return { validated: false, error: error };
     }
