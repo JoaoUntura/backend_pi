@@ -49,12 +49,12 @@ class PedidoControler {
 
     async editPedido(req,res){
         let id = req.params.id
-        let { data, cliente_id, total, forma_pagamento } = req.body;
+        let { data, cliente_id, total, forma_pagamento, entregue } = req.body;
 
         if (isNaN(id)){
             res.status(406).json({success:false, message: "Id inválido!"})
         }else{
-            let result = await pedido.update(id, data, cliente_id, total, forma_pagamento)
+            let result = await pedido.update(id, data, cliente_id, total, forma_pagamento, entregue)
 
             result.validated 
             ?res.status(200).json({success:true, message:"Update realizado com successo"})

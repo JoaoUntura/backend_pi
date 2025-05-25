@@ -45,7 +45,7 @@ class Pedido {
     }
   }
 
-  async update(id, data, cliente_id, total, forma_pagamento) {
+  async update(id, data, cliente_id, total, forma_pagamento, entregue) {
     let pedido = await this.findById(id);
 
     if (pedido.validated && pedido.values != undefined) {
