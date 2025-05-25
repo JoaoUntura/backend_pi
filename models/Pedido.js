@@ -6,7 +6,7 @@ class Pedido {
   async findAll() {
     try {
       const pedidos = await db
-        .select("Pedido.id", "Pedido.data", "Pedido.cliente_id", "Pedido.total", "Pedido.forma_pagamento", "Cliente.nome")
+        .select("Pedido.id", "Pedido.data", "Pedido.cliente_id", "Pedido.total", "Pedido.forma_pagamento", "Pedido.entregue", "Cliente.nome")
         .innerJoin('Cliente', 'Pedido.cliente_id', '=', 'Cliente.id')
         .table("Pedido");
       return { validated: true, values: pedidos };
@@ -54,6 +54,7 @@ class Pedido {
       cliente_id ? (editPedido.cliente_id = cliente_id) : null;
       total ? (editPedido.total = total) : null;
       forma_pagamento ? (editPedido.forma_pagamento = forma_pagamento) : null;
+      entregue ? (editPedido.entregue = entregue) : null;
 
       try {
         await db.update(editPedido).where("id", id).table("Pedido");
