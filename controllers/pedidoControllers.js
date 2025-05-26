@@ -28,7 +28,7 @@ class PedidoControler {
   }
 
   async newPedido(req, res) {
-    let { data, cliente_id, total, forma_pagamento } = req.body;
+    let { data, cliente_id, total, forma_pagamento, entregue } = req.body;
 
     if (!data || !cliente_id || !total || !forma_pagamento) {
       res
@@ -39,7 +39,7 @@ class PedidoControler {
         });
     }
 
-    let result = await pedido.create(data, cliente_id, total, forma_pagamento);
+    let result = await pedido.create(data, cliente_id, total, forma_pagamento,entregue);
     result.validated
       ? res
           .status(201)
