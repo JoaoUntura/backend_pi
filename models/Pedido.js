@@ -39,6 +39,7 @@ class Pedido {
           forma_pagamento: forma_pagamento,
           entregue:entregue
         })
+        .returning('id')
         .table("Pedido");
       return { validated: true, values:pedido };
     } catch (error) {
