@@ -53,9 +53,9 @@ npm run dev
 
 ### 2. Crie e configure .env
 
-PORT = 3000
-PG_CONNECTION_STRING = 'postgresql://postgres.tnnwzsmkqvviwgzwjyma:unifeob@123@aws-0-sa-east-1.pooler.supabase.com:6543/postgres'
-SECRET = asnbfojnsaoJFIOASJfiojsiaJIJISAIOIOIOIOIKASss
+- PORT = 3000
+- PG_CONNECTION_STRING = 'postgresql://postgres.tnnwzsmkqvviwgzwjyma:unifeob@123@aws-0-sa-east-1.pooler.supabase.com:6543/postgres'
+- SECRET = asnbfojnsaoJFIOASJfiojsiaJIJISAIOIOIOIOIKASss
 
 ### Frontend
 
