@@ -46,10 +46,10 @@ Siga os passos abaixo para rodar o sistema localmente:
 
 ### 1. Clone o Repositório
 
-git clone https://github.com/JoaoUntura/backend_pi
-cd backend_pi
-npm install
-npm run dev
+- git clone https://github.com/JoaoUntura/backend_pi
+- cd backend_pi
+- npm install
+- npm run dev
 
 ### 2. Crie e configure .env
 
@@ -59,5 +59,5 @@ npm run dev
 
 ### Frontend
 
-git clone https://github.com/JoaoUntura/front_pi
-Abra o arquivo index.html com um duplo clique ou Live Server
+- git clone https://github.com/JoaoUntura/front_pi
+- Abra o arquivo index.html com um duplo clique ou Live Server
